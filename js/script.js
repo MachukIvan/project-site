@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
     // Таймер
-    let deadline = Date.parse(new Date()) + 500*1000; // Можно задать конкретное время в формате 'YYYY-MM-DD'
+    let deadline = +new Date() + 500*1000; // Можно задать конкретное время в формате 'YYYY-MM-DD'
 
     function getTimeRemaining(endtime) {
         let t = endtime - +new Date(), // Date.parse(endtime) - если задано конкретное время в deadline
