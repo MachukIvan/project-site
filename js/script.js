@@ -85,4 +85,22 @@ window.addEventListener('DOMContentLoaded', function () {
 
     setClock('timer', deadline);
 
+    // Modal
+
+    let moreBtn = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        overlayPopup = document.querySelector('.popup'),
+        closeBtn = document.querySelector('.popup-close');
+    
+    moreBtn.addEventListener('click', function(e) {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', function() {
+        overlay.style.display = 'none';
+        this.classList.remove('more-splash');
+    });
+
 });
