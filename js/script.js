@@ -101,6 +101,7 @@ window.addEventListener('DOMContentLoaded', function () {
     closeBtn.addEventListener('click', function() {
         overlay.style.display = 'none';
         this.classList.remove('more-splash');
+        document.body.style.overflow = 'auto';
     });
 
 });
