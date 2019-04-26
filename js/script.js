@@ -91,27 +91,29 @@ window.addEventListener('DOMContentLoaded', function () {
         overlay = document.querySelector('.overlay'),
         closeBtn = document.querySelector('.popup-close'),
         descrBtn = document.querySelectorAll('.description-btn');
-        
+    
+    console.log(moreBtn);
 
-    let popBtns = {
-        
-        open: function() {
-            overlay.style.display = 'block';
-            this.classList.add('more-splash');
-            document.body.style.overflow = 'hidden';
-        },
+    function open(event) {
+        let target = event.target;
+        overlay.style.display = 'block';
+        target.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    }
 
-        close: function() {
-            overlay.style.display = 'none';
-            this.classList.remove('more-splash');
-            document.body.style.overflow = '';
-        }
-    };
+    function close() {
+        overlay.style.display = 'none';
+        moreBtn.classList.remove('more-splash');
+        descrBtn.forEach(function(item) {
+            item.classList.remove('more-splash');
+        });
+        document.body.style.overflow = '';
+    }
 
-    moreBtn.addEventListener('click', popBtns.open);
+    moreBtn.addEventListener('click', open);
     descrBtn.forEach(function(item) {
-        item.addEventListener('click', popBtns.open);
+        item.addEventListener('click', open);
     });
-    closeBtn.addEventListener('click', popBtns.close);
+    closeBtn.addEventListener('click', close);
 
 });
