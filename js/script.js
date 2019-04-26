@@ -89,19 +89,29 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let moreBtn = document.querySelector('.more'),
         overlay = document.querySelector('.overlay'),
-        overlayPopup = document.querySelector('.popup'),
-        closeBtn = document.querySelector('.popup-close');
-    
-    moreBtn.addEventListener('click', function(e) {
-        overlay.style.display = 'block';
-        this.classList.add('more-splash');
-        document.body.style.overflow = 'hidden';
-    });
+        closeBtn = document.querySelector('.popup-close'),
+        descrBtn = document.querySelectorAll('.description-btn');
+        
 
-    closeBtn.addEventListener('click', function() {
-        overlay.style.display = 'none';
-        this.classList.remove('more-splash');
-        document.body.style.overflow = 'auto';
+    let popBtns = {
+        
+        open: function() {
+            overlay.style.display = 'block';
+            this.classList.add('more-splash');
+            document.body.style.overflow = 'hidden';
+        },
+
+        close: function() {
+            overlay.style.display = 'none';
+            this.classList.remove('more-splash');
+            document.body.style.overflow = '';
+        }
+    };
+
+    moreBtn.addEventListener('click', popBtns.open);
+    descrBtn.forEach(function(item) {
+        item.addEventListener('click', popBtns.open);
     });
+    closeBtn.addEventListener('click', popBtns.close);
 
 });
