@@ -85,17 +85,15 @@ window.addEventListener('DOMContentLoaded', function () {
 
     setClock('timer', deadline);
 
-    // Modal
+    // Модальное окно
 
     let moreBtn = document.querySelector('.more'),
         overlay = document.querySelector('.overlay'),
         closeBtn = document.querySelector('.popup-close'),
         descrBtn = document.querySelectorAll('.description-btn');
-    
-    console.log(moreBtn);
 
-    function open(event) {
-        let target = event.target;
+    function open(e) {
+        let target = e.target;
         overlay.style.display = 'block';
         target.classList.add('more-splash');
         document.body.style.overflow = 'hidden';
