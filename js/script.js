@@ -22,10 +22,6 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    const option1 = new Options(200, 200, 'red', 20, 'center');
-    option1.createDiv('Привет');
-
-
     // Tabs
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelector('.info-header'),
@@ -147,21 +143,24 @@ window.addEventListener('DOMContentLoaded', function () {
         failure: 'Произошла ошибка'
     };
 
-    let form = document.querySelector('.main-form'),
+    let modalForm = document.querySelector('.main-form'),
         input = document.getElementsByTagName('input'),
-        statusMessage = document.createElement('div');
+        statusMessage = document.createElement('div'),
+        contactForm = document.getElementById('form');
+        
 
     statusMessage.classList.add('status');
 
-    form.addEventListener('submit', function(event){
+
+    modalForm.addEventListener('submit', function(event){
         event.preventDefault();
-        form.appendChild(statusMessage);
+        modalForm.appendChild(statusMessage);
         
         let request = new XMLHttpRequest();
         request.open('POST', 'server.php');
         request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-        let formData = new FormData(form);
+        let formData = new FormData(modalForm);
         request.send(formData);
 
         request.addEventListener('readystatechange', function(){
@@ -173,5 +172,35 @@ window.addEventListener('DOMContentLoaded', function () {
                 statusMessage.innerHTML = message.failure;
             }
         });
+
+        for (let i = 0; i < input.length; i++) {
+            input[i].value = '';
+        }
+    });
+
+    contactForm.addEventListener('submit', function(event){
+        event.preventDefault();
+        contactForm.appendChild(statusMessage);
+        
+        let request = new XMLHttpRequest();
+        request.open('POST', 'server.php');
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        let formData = new FormData(contactForm);
+        request.send(formData);
+
+        request.addEventListener('readystatechange', function(){
+            if (request.readyState < 4) {
+                statusMessage.innerHTML = message.loading;
+            } else if (request.readyState === 4 && request.status == 200) {
+                statusMessage.innerHTML = message.success;
+            } else {
+                statusMessage.innerHTML = message.failure;
+            }
+        });
+
+        for (let i = 0; i < input.length; i++) {
+            input[i].value = '';
+        }
     });
 });
