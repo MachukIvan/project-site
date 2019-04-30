@@ -10,23 +10,23 @@ window.addEventListener('DOMContentLoaded', function () {
             this.fontSize = fontSize;
             this.textAlign = textAlign;
         }
-        createDiv(text = 'Здесь ваш текст') {
+        createDiv(text = 'Текст') {
             const div = document.createElement('div');
             div.textContent = text;
-            div.style.cssText = `height: ${this.height}; 
-                                 width: ${this.width};
+            div.style.cssText = `height: ${this.height}px; 
+                                 width: ${this.width}px;
                                  background: ${this.bg}; 
-                                 font-size: ${this.fontSize}; 
+                                 font-size: ${this.fontSize}px; 
                                  text-align: ${this.textAlign};`;
             document.body.appendChild(div);
         }
     }
 
-    const option1 = new Options('200px', '200px', 'red', '20', 'center');
-    option1.createDiv('Текст');
+    const option1 = new Options(200, 200, 'red', 20, 'center');
+    option1.createDiv('Привет');
 
 
-    // Табы
+    // Tabs
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelector('.info-header'),
         tabContent = document.querySelectorAll('.info-tabcontent');
@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Таймер
+    // Timer
     let deadline = Date.parse(new Date()) + 500 * 1000; // Можно задать конкретное время в формате 'YYYY-MM-DD'
 
     function getTimeRemaining(endtime) {
@@ -110,7 +110,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     setClock('timer', deadline);
 
-    // Модальное окно
+    // Modal
 
     let moreBtn = document.querySelector('.more'),
         overlay = document.querySelector('.overlay'),
@@ -139,4 +139,39 @@ window.addEventListener('DOMContentLoaded', function () {
     });
     closeBtn.addEventListener('click', close);
 
+    // Form
+
+    let message = {
+        loading: 'Загружаю',
+        success: 'Скоро мы с вами свяжемся',
+        failure: 'Произошла ошибка'
+    };
+
+    let form = document.querySelector('.main-form'),
+        input = document.getElementsByTagName('input'),
+        statusMessage = document.createElement('div');
+
+    statusMessage.classList.add('status');
+
+    form.addEventListener('submit', function(event){
+        event.preventDefault();
+        form.appendChild(statusMessage);
+        
+        let request = new XMLHttpRequest();
+        request.open('POST', 'server.php');
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        let formData = new FormData(form);
+        request.send(formData);
+
+        request.addEventListener('readystatechange', function(){
+            if (request.readyState < 4) {
+                statusMessage.innerHTML = message.loading;
+            } else if (request.readyState === 4 && request.status == 200) {
+                statusMessage.innerHTML = message.success;
+            } else {
+                statusMessage.innerHTML = message.failure;
+            }
+        });
+    });
 });
