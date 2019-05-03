@@ -2,27 +2,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     'use strict';
 
-    class Options {
-        constructor(height, width, bg, fontSize, textAlign) {
-            this.height = height;
-            this.width = width;
-            this.bg = bg;
-            this.fontSize = fontSize;
-            this.textAlign = textAlign;
-        }
-        createDiv(text = 'Текст') {
-            const div = document.createElement('div');
-            div.textContent = text;
-            div.style.cssText = `height: ${this.height}px; 
-                                 width: ${this.width}px;
-                                 background: ${this.bg}; 
-                                 font-size: ${this.fontSize}px; 
-                                 text-align: ${this.textAlign};`;
-            document.body.appendChild(div);
-        }
-    }
-
     // Tabs
+
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelector('.info-header'),
         tabContent = document.querySelectorAll('.info-tabcontent');
@@ -57,6 +38,7 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
     // Timer
+
     let deadline = Date.parse(new Date()) + 500 * 1000; // Можно задать конкретное время в формате 'YYYY-MM-DD'
 
     function getTimeRemaining(endtime) {
@@ -107,6 +89,7 @@ window.addEventListener('DOMContentLoaded', function () {
     setClock('timer', deadline);
 
     // Modal
+
     let moreBtn = document.querySelector('.more'),
         overlay = document.querySelector('.overlay'),
         closeBtn = document.querySelector('.popup-close'),
@@ -135,6 +118,7 @@ window.addEventListener('DOMContentLoaded', function () {
     closeBtn.addEventListener('click', close);
 
     // Forms
+
     let message = {
         loading: 'Загружаю',
         success: 'Скоро мы с вами свяжемся',
@@ -190,6 +174,7 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
     // Slides
+
     let slideIndex = 1,
         slides = document.querySelectorAll('.slider-item'),
         prev = document.querySelector('.prev'),
@@ -228,4 +213,48 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    //Calc 
+
+    let persons = document.querySelectorAll('.counter-block-input')[0],
+        days = document.querySelectorAll('.counter-block-input')[1],
+        place = document.getElementById('select'),
+        totalValue = document.getElementById('total'),
+        personsSum = 0,
+        daysSum = 0,
+        total = 0;
+        
+        totalValue.innerHTML = 0;
+
+        persons.addEventListener('input', function(){
+            personsSum = +this.value;
+            total = (daysSum + personsSum) * 4000; // random formula
+
+            if (days.value == '' || persons.value == 0) {
+                totalValue.innerHTML = 0;
+            } else {
+                totalValue.innerHTML = total;
+            }
+        });
+
+        days.addEventListener('input', function(){
+            daysSum = +this.value;
+            total = (daysSum + personsSum) * 4000; // random formula
+
+            if (persons.value == '' || days.value == 0) {
+                totalValue.innerHTML = 0;
+            } else {
+                totalValue.innerHTML = total;
+            }
+        });
+
+        place.addEventListener('change', function() {
+            if (days.value == '' || persons.value == '') {
+                totalValue.innerHTML = 0;
+            } else {
+                let a = total;
+                totalValue.innerHTML = a * this.options[this.selectedIndex].value;
+            }
+        });
+        
 });
