@@ -1,4 +1,4 @@
-function forms() {
+export default function forms() {
     let message = {
         loading: 'Загружаю',
         success: 'Скоро мы с вами свяжемся',
@@ -53,5 +53,3 @@ function forms() {
         postXHR(contactForm);
     });
 }
-
-module.exports = forms;

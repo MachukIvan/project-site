@@ -1,4 +1,4 @@
-function slides() {
+export default function slides() {
     let slideIndex = 1,
         slides = document.querySelectorAll('.slider-item'),
         prev = document.querySelector('.prev'),
@@ -38,5 +38,3 @@ function slides() {
         }
     });
 }
-
-module.exports = slides;

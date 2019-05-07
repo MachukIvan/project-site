@@ -1,4 +1,4 @@
-function timer() {
+export default function timer() {
     let deadline = Date.parse(new Date()) + 500 * 1000; // Можно задать конкретное время в формате 'YYYY-MM-DD'
 
     function getTimeRemaining(endtime) {
@@ -48,5 +48,3 @@ function timer() {
 
     setClock('timer', deadline);
 }
-
-module.exports = timer;

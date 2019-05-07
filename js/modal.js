@@ -1,4 +1,4 @@
-function modal() {
+export default function modal() {
     let moreBtn = document.querySelector('.more'),
         overlay = document.querySelector('.overlay'),
         closeBtn = document.querySelector('.popup-close'),
@@ -26,5 +26,3 @@ function modal() {
     });
     closeBtn.addEventListener('click', close);
 }
-
-module.exports = modal;

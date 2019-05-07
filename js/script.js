@@ -1,13 +1,11 @@
-window.addEventListener('DOMContentLoaded', function () {
+import calc from './calc.js';
+import forms from './forms.js';
+import modal from './modal.js';
+import slides from './slides.js';
+import tabs from './tabs.js';
+import timer from './timer.js';
 
-    'use strict';
-        
-    let calc = require('./calc.js'),
-        forms = require('./forms.js'),
-        modal = require('./modal.js'),
-        slides = require('./slides.js'),
-        tabs = require('./tabs.js'),
-        timer = require('./timer.js');
+window.addEventListener('DOMContentLoaded', function () {
 
     calc();
     forms();
